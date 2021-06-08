@@ -3,20 +3,25 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.container{
+    position: relative;
+}
 
 .text{
     font-family: 'Roboto Mono', monospace;
     font-size: 2rem;
-    position: relative;
+    /* position: relative; */
+    /* --first_steps: attr(data-first-text); */
 }
 
-.text::before{
+/* .text::before{
     content: '';
     position: absolute;
     top: 0;
@@ -24,10 +29,22 @@ body{
     left: 0;
     right: 0;
     background-color: white;
-    animation: reveal steps(7) 2s 2s forwards, reveal_2 steps(8) 2s 6s forwards;
+    animation: reveal steps(var(--first_steps), end) 2s 2s forwards, reveal_2 steps(8, end) 2s 6s forwards;
+} */
+
+.text_hide{
+    /* content: ''; */
+    /* --first_steps: attr(data-first-text); */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    /* animation: reveal steps(var(--first_steps), end) 2s 2s forwards, reveal_2 steps(var(--second_steps), end) 2s 6s forwards; */
 }
 
-.text::after{
+/* .text::after{
     content: '';
     position: absolute;
     top: 0;
@@ -37,6 +54,18 @@ body{
     background-color: transparent;
     border-left: 3px solid black;
     animation: cursor 0.7s cubic-bezier(0,.26,.44,.93) infinite, reveal steps(7) 2s 2s forwards, reveal_2 steps(8) 2s 6s forwards;
+} */
+
+.text_cursor{
+    /* content: ''; */
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
+    border-left: 3px solid black;
+    /* animation: cursor 0.7s cubic-bezier(0,.26,.44,.93) infinite, reveal steps(7) 2s 2s forwards, reveal_2 steps(8) 2s 6s forwards; */
 }
 
 @keyframes cursor {
@@ -51,20 +80,20 @@ body{
     }
 }
 
-@keyframes reveal {
+/* @keyframes reveal {
     from{
         left: 0;
     }
     to{
         left: 46%;
     }
-}
+} */
 
-@keyframes reveal_2{
+/* @keyframes reveal_2{
     from{
         left: 46%;
     }
     to{
         left: 100%;
     }
-}
+} */
