@@ -1,3 +1,3 @@
 # typing_animation
 
-<img src="assets/animation.jpg">
+<img src="assets/animation.gif">
