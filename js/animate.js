@@ -22,11 +22,6 @@ let cursor_timings = {
     easing: 'cubic-bezier(0,.26,.44,.93)'
 }
 
-document.querySelector(".text_hide").animate([
-    { left: '0%' },
-    { left: `${(100 / text_len) * (word_len[0] + 1)}%` }
-], timings);
-
 document.querySelector(".text_cursor").animate([
     {
         opacity: 0
@@ -39,10 +34,29 @@ document.querySelector(".text_cursor").animate([
     }
 ], cursor_timings);
 
-document.querySelector(".text_cursor").animate([
-    { left: '0%' },
-    { left: `${(100 / text_len) * (word_len[0] + 1)}%` }
-], timings);
+if(text_array_slice.length == 1){
+    timings.easing = `steps(${Number(word_len[0])}, end)`;
+
+    document.querySelector(".text_hide").animate([
+        { left: '0%' },
+        { left: `${(100 / text_len) * (word_len[0])}%` }
+    ], timings);
+
+    document.querySelector(".text_cursor").animate([
+        { left: '0%' },
+        { left: `${(100 / text_len) * (word_len[0])}%` }
+    ], timings);
+} else{
+    document.querySelector(".text_hide").animate([
+        { left: '0%' },
+        { left: `${(100 / text_len) * (word_len[0] + 1)}%` }
+    ], timings);
+
+    document.querySelector(".text_cursor").animate([
+        { left: '0%' },
+        { left: `${(100 / text_len) * (word_len[0] + 1)}%` }
+    ], timings);
+}
 
 
 for (let i = 1; i < text_array_slice.length; i++) {
