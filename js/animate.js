@@ -1,6 +1,6 @@
+let iteration = 1;
+let words = Array("Animation", "Typer", "Typing Animation");
 function typing_animation() {
-    // document.querySelector('.text').style.opacity = 1;
-    document.querySelector('.text_hide').style.left = '0%';
     let text_element = document.querySelector(".text");
     let text_array = text_element.innerHTML.split("");
     let text_array_slice = text_element.innerHTML.split(" ");
@@ -40,7 +40,7 @@ function typing_animation() {
     if (text_array_slice.length == 1) {
         timings.easing = `steps(${Number(word_len[0])}, end)`;
 
-        let reveal_animation = document.querySelector(".text_hide").animate([
+        let reveal_animation_1 = document.querySelector(".text_hide").animate([
             { left: '0%' },
             { left: `${(100 / text_len) * (word_len[0])}%` }
         ], timings);
@@ -50,26 +50,39 @@ function typing_animation() {
             { left: `${(100 / text_len) * (word_len[0])}%` }
         ], timings);
 
-        reveal_animation.onfinish = () => {
-            // console.log(1);
+        reveal_animation_1.onfinish = () => {
             setTimeout(() => {
-                // typing_animation();
                 document.querySelector('.text_hide').animate([
                     {left: '0%'}
                 ], {
                     duration: 2000,
-                    // easing: 'cubic-bezier(1,.04,.85,-0.18)'
-                    easing: 'cubic-bezier(.73,0,.38,.88)'
+                    easing: 'cubic-bezier(.73,0,.38,.88)',
+                    fill: `forwards`
                 });
-                document.querySelector('.text_cursor').animate([
+                let hide_animation_1 = document.querySelector('.text_cursor').animate([
                     {left: '0%'}
                 ], {
                     duration: 2000,
-                    // easing: 'cubic-bezier(1,.04,.85,-0.18)'
-                    easing: 'cubic-bezier(.73,0,.38,.88)'
+                    easing: 'cubic-bezier(.73,0,.38,.88)',
+                    fill: `forwards`
                 });
-                // document.querySelector('.text').innerHTML = "Typing Animation";
-                typing_animation();
+                hide_animation_1.onfinish = () => {
+                    console.log(2);
+                    if(iteration%3 != 0){
+                        if(iteration%2 != 0){
+                            text_element.innerHTML = words[0];
+                        }
+                        if(iteration%2 == 0){
+                            text_element.innerHTML = words[1];
+                        }
+                    }
+                    if(iteration%3 == 0){
+                        text_element.innerHTML = words[2];
+                    }
+                    // text_element.innerHTML = "Change";
+                    typing_animation();
+                }
+                // typing_animation();
             }, 1000);
         }
     } else {
@@ -97,7 +110,6 @@ function typing_animation() {
         }
 
         let timings_2 = {
-            // id: 2,
             easing: `steps(${Number(single_word_len + 1)}, end)`,
             delay: (2 * (i + 1) + (2 * i)) * (1000),
             // delay: ((i*2)-1)*1000,
@@ -107,7 +119,7 @@ function typing_animation() {
 
         if (i == (text_array_slice.length - 1)) {
             timings_2.easing = `steps(${Number(single_word_len)}, end)`;
-            let reveal_animation = document.querySelector(".text_hide").animate([
+            let reveal_animation_2 = document.querySelector(".text_hide").animate([
                 { left: `${left_instance}%` },
                 { left: `${left_instance + ((100 / text_len) * (word_len[i]))}%` }
             ], timings_2);
@@ -117,35 +129,41 @@ function typing_animation() {
                 { left: `${left_instance + ((100 / text_len) * (word_len[i]))}%` }
             ], timings_2);
 
-            reveal_animation.onfinish = () => {
-                // console.log(1);
+            reveal_animation_2.onfinish = () => {
                 setTimeout(() => {
-                    // typing_animation();
-                    document.querySelector('.text_hide').animate([
+                    let hide_animation_2 = document.querySelector('.text_hide').animate([
                         {left: '0%'}
                     ], {
                         duration: 2000,
-                        // easing: 'cubic-bezier(1,.04,.85,-0.18)'
-                        easing: 'cubic-bezier(.73,0,.38,.88)'
+                        easing: 'cubic-bezier(.73,0,.38,.88)',
+                        fill: `forwards`
                     });
                     document.querySelector('.text_cursor').animate([
                         {left: '0%'}
                     ], {
                         duration: 2000,
-                        // easing: 'cubic-bezier(1,.04,.85,-0.18)'
-                        easing: 'cubic-bezier(.73,0,.38,.88)'
+                        easing: 'cubic-bezier(.73,0,.38,.88)',
+                        fill: `forwards`
                     });
-                    // document.querySelector('.text').innerHTML = "Typing Animation";
-                    typing_animation();
+                    hide_animation_2.onfinish = () => {
+                        console.log(2);
+                        if(iteration%3 != 0){
+                            if(iteration%2 != 0){
+                                text_element.innerHTML = words[0];
+                            }
+                            if(iteration%2 == 0){
+                                text_element.innerHTML = words[1];
+                            }
+                        }
+                        if(iteration%3 == 0){
+                            text_element.innerHTML = words[2];
+                        }
+                        // text_element.innerHTML = "Change";
+                        typing_animation();
+                    }
+                    // typing_animation();
                 }, 1000);
             }
-            // document.getAnimations().forEach((animation) => {
-            //     animation.onfinish = () => {
-            //         if(animation.effect.target.classList.contains('text_hide')){
-            //             document.querySelector('.text').innerHTML = "Typing Animation";
-            //         }
-            //     }
-            // })
         } else {
             document.querySelector(".text_hide").animate([
                 { left: `${left_instance}%` },
@@ -160,31 +178,6 @@ function typing_animation() {
 
         left_instance = left_instance + ((100 / text_len) * (word_len[i] + 1));
     }
+    iteration++;
 }
 typing_animation();
-// const animation_count;
-// setInterval(() => {
-    // document.getAnimations().forEach((animation) => {
-    //     // if(animation.effect.getTiming().duration == 700){
-    //     //     console.log('cursor animation');
-    //     // }
-    //     // if(animation.effect.getTiming().duration == 2000){
-    //     //     console.log('text_animation');
-    //     // }
-    //     // console.log(animation.effect.getComputedTiming());
-
-    //     animation.onfinish = () => { 
-    //         console.log(animation.effect.target)
-
-    //         // document.querySelector('.text').innerHTML = "Typing Animation";
-    //         // typing_animation();
-    //     }
-    //     // console.log(animation.effect.getTiming().duration);
-    // })
-
-    // console.log(document.querySelector('.text_cursor').getAnimations());
-// }, 2000);
-// document.getAnimations().forEach((animation) => {
-//     console.log(animation.playState);
-// })
-// console.log(document.getAnimations());
